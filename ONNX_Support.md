@@ -71,7 +71,7 @@ model.reshape({input_layer: new_shape})
 
 ### Weights Saved in External Files
 
-OpenVINO™ supports ONNX models that store weights in external files. It is especially useful for models larger than 2GB because of protobuf limitations. To read such models, use the `model` parameter in the `IECore.read_network(model=path_to_onnx_file)` method. Note that the parameter for the path to the binary weight file, `weights=` should be empty in this case, because paths to external weights are saved directly in an ONNX model. Otherwise, a runtime exception is thrown. Reading models with external weights is **NOT** supported by the `read_network(weights=path_to_bin_file)` parameter.
+OpenVINO™ supports ONNX models that store weights in external files. It is especially useful for models larger than 2GB because of protobuf limitations. To read such models, use the `model` parameter in the `openvino.runtime.Core.read_model(model : "path_to_onnx_file")` method. Note that the parameter for the path to the binary weight file, `weights=` should be empty in this case, because paths to external weights are saved directly in an ONNX model. Otherwise, a runtime exception is thrown. Reading models with external weights is **NOT** supported by the `read_model(weights: "path_to_bin_file")` parameter.
 
 Paths to external weight files are saved in an ONNX model; these paths are relative to the model’s directory path. It means that if a model is located at: `$HOME/workspace/models/model.onnx` and a file that contains external weights: `$HOME/workspace/models/data/weights.bin`, the path saved in model should be: data/weights.bin.
 
