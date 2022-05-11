@@ -61,13 +61,7 @@ model = core.read_model("model.xml")
 ```
 
 ### Reshape Feature
-OpenVINO™ does not provide a mechanism to specify pre-processing (like mean values subtraction, reverse input channels) for the ONNX format. If an ONNX model contains dynamic shapes for input, please use the [IENetwork.reshape](api/ie_python_api/_autosummary/openvino.inference_engine.IENetwork.html#openvino.inference_engine.IENetwork.reshape) method to reshape the model.
-
-```python
-model = core.read_model("model.xml")
-input_layer = next(iter(model.input_info))
-model.reshape({input_layer: new_shape})
-```
+OpenVINO™ does not provide a mechanism to specify pre-processing (like mean values subtraction, reverse input channels) for the ONNX format. If an ONNX model contains dynamic shapes for input, please see the [Changing input shapes](https://docs.openvino.ai/latest/openvino_docs_OV_UG_ShapeInference.html) documentation.
 
 ### Weights Saved in External Files
 
