@@ -11,8 +11,8 @@
 Starting with the 2020.4 release, OpenVINO™ supports reading native ONNX models. The `Core::ReadNetwork()` method provides a uniform way to read models from IR or ONNX format, it is a recommended approach to reading models. Example:
 
 ```cpp
-InferenceEngine::Core core;
-auto network = core.ReadNetwork("model.onnx");
+ov::Core core;
+std::shared_ptr<ov::Model> model = core.read_model("model.xml");
 ```
 
 ### Reshape Feature
@@ -55,22 +55,18 @@ Unsupported types of tensors:
 Starting with the 2020.4 release, OpenVINO™ supports reading native ONNX models. The `IECore.read_network()` method provides a uniform way to read models from IR or ONNX format, it is a recommended approach to reading models. Example:
 
 ```python
-from openvino.inference_engine import IECore
-
-ie = IECore()
-net = ie.read_network(model=path_to_onnx_file)
+import openvino.runtime as ov
+core = ov.Core()
+model = core.read_model("model.xml")
 ```
 
 ### Reshape Feature
 OpenVINO™ does not provide a mechanism to specify pre-processing (like mean values subtraction, reverse input channels) for the ONNX format. If an ONNX model contains dynamic shapes for input, please use the [IENetwork.reshape](api/ie_python_api/_autosummary/openvino.inference_engine.IENetwork.html#openvino.inference_engine.IENetwork.reshape) method to reshape the model.
 
 ```python
-from openvino.inference_engine import IECore
-
-ie = IECore()
-net = ie.read_network(model=path_to_onnx_file)
-input_layer = next(iter(net.input_info))
-net.reshape({input_layer: new_shape})
+model = core.read_model("model.xml")
+input_layer = next(iter(model.input_info))
+model.reshape({input_layer: new_shape})
 ```
 
 ### Weights Saved in External Files
@@ -83,7 +79,8 @@ Paths to external weight files are saved in an ONNX model; these paths are relat
 * A single model can use many external weights files.
 * Data of many tensors can be stored in a single external weights file (it is processed using offset and length values, which can be also saved in a model).
 
-The described mechanism is the only possibility to read weights from external files. The `weights` input parameter of the [IECore.read_network](api/ie_python_api/_autosummary/openvino.inference_engine.IECore.html#openvino.inference_engine.IECore.read_network) function is NOT supported for ONNX models and should not be passed, or set as None.
+The described mechanism is the only possibility to read weights from external files. The `weights` input parameter of the [openvino.runtime.Core.read_model](https://docs.openvino.ai/latest/api/ie_python_api/_autosummary/openvino.runtime.Core.html#openvino.runtime.Core.read_model)
+function is NOT supported for ONNX models and should not be passed, or set as None.
 
 Unsupported types of tensors:
 * string
