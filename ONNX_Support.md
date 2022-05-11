@@ -16,7 +16,7 @@ std::shared_ptr<ov::Model> model = core.read_model("model.xml");
 ```
 
 ### Reshape Feature
-OpenVINO™ does not provide a mechanism to specify pre-processing (like mean values subtraction, reverse input channels) for the ONNX format. If an ONNX model contains dynamic shapes for input, please use the `CNNNetwork::reshape` method to reshape the model.
+OpenVINO™ does not provide a mechanism to specify pre-processing (like mean values subtraction, reverse input channels) for the ONNX format. If an ONNX model contains dynamic shapes for input, please see the [Changing input shapes](https://docs.openvino.ai/latest/openvino_docs_OV_UG_ShapeInference.html) documentation.
 
 ### Weights Saved in External Files
 
